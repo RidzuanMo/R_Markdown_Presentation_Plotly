@@ -1,0 +1,60 @@
+---
+title: "R Markdown Presentation & Plotly"
+author: "Ridzuan Mohamad"
+date: "6/17/2017"
+output:
+  ioslides_presentation: default
+  slidy_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+## R Markdown
+
+This is an R Markdown presentation. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document.
+
+## Selected Variable and Description
+
+No.| Variable | Description
+---|----------|----------------------
+1. |mpg      | Miles/(US) gallon
+2. |cyl	     | Number of cylinders
+3. |hp	     | Gross horsepower
+5. |wt	     | Weight (1000 lbs)
+6. |am	     | Transmission (0 = automatic, 1 = manual
+
+## Datset Summary
+
+```{r cars, echo = TRUE}
+summary(mtcars[,c('mpg', 'cyl', 'hp', 'wt')])
+```
+
+## Boxplot
+
+```{r, warning=FALSE, message=FALSE}
+library(plotly)
+
+mtcars$am[mtcars$am==0] <- 'Auto'
+mtcars$am[mtcars$am==1] <- 'Manual'
+
+plot_ly(mtcars, y = ~mpg, type = "box", color = ~factor(am))
+```
+
+## Scatter Plot
+
+```{r, warning=FALSE, message=FALSE}
+library(plotly)
+
+mtcars$am[mtcars$am==0] <- 'Auto'
+mtcars$am[mtcars$am==1] <- 'Manual'
+
+plot_ly(
+    mtcars, x = ~wt, y = ~mpg, type = "scatter", 
+    color = ~factor(am), size = ~hp
+)
+```
+
